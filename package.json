@@ -5,9 +5,16 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+"postinstall": "ng build --aot -prod"    "start": "node server.js"
   },
-  "repository": {
+  "engines": {
+
+    "node": "8.11.3",
+
+    "npm": "5.6.0"
+
+  },
+ "repository": {
     "type": "git",
     "url": "git+https://github.com/nunks500/NODEJS.git"
   },
@@ -17,6 +24,10 @@
     "url": "https://github.com/nunks500/NODEJS/issues"
   },
   "homepage": "https://github.com/nunks500/NODEJS#readme",
+  "dependencies":{
+    "typescript": "~2.3.3",
+    
+  }
   "devDependencies": {
     "@angular/cli": "^6.0.8",
     "@angular/compiler-cli": "^6.0.5"
