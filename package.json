@@ -26,12 +26,11 @@
   "devDependencies": {
     "@angular/cli": "^6.0.8",
     "@angular/compiler-cli": "^6.0.5"
-  }
-}
-{
-  "engines": {
+  },
+    "engines": {
 
     "node": "8.11.3"
 
   }
 }
+
