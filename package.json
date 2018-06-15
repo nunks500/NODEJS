@@ -26,8 +26,8 @@
   "homepage": "https://github.com/nunks500/NODEJS#readme",
   "dependencies":{
     "typescript": "~2.3.3",
-    
-  }
+
+  },
   "devDependencies": {
     "@angular/cli": "^6.0.8",
     "@angular/compiler-cli": "^6.0.5"
