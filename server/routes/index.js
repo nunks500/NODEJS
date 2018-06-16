@@ -47,7 +47,7 @@ module.exports = function(app){
 
 	 var movie = req.body.movietitle;
 	 var Year,Genre;
-
+	 console.log(req.body);
 	    http.get({
         host: 'http://www.omdbapi.com',
         path: '/?t=' + movie +'&apikey=8adb7f03'
