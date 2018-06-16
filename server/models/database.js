@@ -9,3 +9,13 @@ const client = new Client({
   database:'d3ktg98lp58nm0'
 })
 
+client.connect((err) => {
+  if (err) {
+    console.error('connection error', err.stack)
+  } else {
+    console.log('connected');
+  }
+
+})
+
+
