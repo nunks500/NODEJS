@@ -45,7 +45,7 @@ module.exports = function(app){
 
 	app.post('/movies', function(req, res, next) {
 
-	 console.log(req.body.movietitle);	
+	 console.log(req);	
 	 var movie = req.body.movietitle;
 	 var Year,Genre;
 
