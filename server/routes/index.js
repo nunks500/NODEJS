@@ -45,7 +45,7 @@ module.exports = function(app){
 
 	app.post('/movies', function(req, res, next) {
 
-	 console.log(req.body);	
+	 console.log(req.body.movietitle);	
 	 var movie = req.body.movietitle;
 	 var Year,Genre;
 
@@ -62,6 +62,7 @@ module.exports = function(app){
 
             // Data reception is done, do whatever with it!
             var parsed = JSON.parse(body);
+            console.
             Year = parsed.Year;
         });
     });
