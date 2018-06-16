@@ -62,10 +62,7 @@ module.exports = function(app){
 
             // Data reception is done, do whatever with it!
             var parsed = JSON.parse(body);
-            callback({
-                Year: parsed.Year,
-                Genre: parsed.Genre
-            });
+            Year = parsed.Year;
         });
     });
 	            res.status(200).json({
