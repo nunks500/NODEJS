@@ -67,7 +67,10 @@ module.exports = function(app){
             });
         });
     });
-	    res.send(Year);
+	            res.status(200).json({
+                    message: Year
+
+                });
 /*
 	 database.insertLocal(description,imagelink,lat,long)
                 .then(function (user_id) {
