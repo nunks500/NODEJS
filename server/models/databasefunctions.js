@@ -50,7 +50,7 @@ exports.getmoviessimple = function () {
 }
 
 exports.getmovies = function (sortby) {
-  console.log(sortby);
+  
   if(sortby == 'year'){
  return new Promise(function (resolve, reject) {
   client.query("SELECT * FROM movies ORDER BY movies.year",
@@ -68,7 +68,7 @@ exports.getmovies = function (sortby) {
 });
 }
 else if(sortby == 'genre'){
-  console.log('entrei fds');
+  
    return new Promise(function (resolve, reject) {
   client.query("SELECT * FROM movies ORDER BY movies.Genre",
     function (err, result) {
@@ -104,7 +104,7 @@ else if(sortby == 'title'){
 }
 
 exports.getmoviesbyyearsimple = function (year) {
-  console.log("boh yead")
+ 
  return new Promise(function (resolve, reject) {
   client.query("SELECT * FROM movies WHERE movies.year = $1",[year],
     function (err, result) {
@@ -123,7 +123,7 @@ exports.getmoviesbyyearsimple = function (year) {
 }
 
 exports.getmoviesbyyear = function (year,sortby) {
-  console.log("fuk me");
+ 
   if(sortby == 'year'){
    return new Promise(function (resolve, reject) {
     client.query("SELECT * FROM movies WHERE movies.year = $1 ORDER BY movies.year",[year],
