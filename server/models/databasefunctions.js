@@ -48,3 +48,21 @@ exports.getmovies = function () {
 });
 
 }
+
+exports.getmoviesbyyear = function (year) {
+ return new Promise(function (resolve, reject) {
+  client.query("SELECT * FROM movies WHERE movies.year = $1",[year],
+    function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+       if(result.rows.length == 0)
+        reject(err);
+      else
+        resolve(result);
+      
+    }
+  });
+});
+
+}

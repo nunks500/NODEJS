@@ -40,6 +40,20 @@ module.exports = function(app){
  });
 	app.get('/movies', function(req, res, next) {
 		//res.sendFile(path.resolve('../App/views/index.html'));
+		if(req.query.year != null || req.query.year != 'undefined')
+		{
+				 database.getmoviesbyyear(req.query.year)
+                .then(function (local) {
+                    res.status(200).send(local.rows);
+                })
+                .catch(function (err) {
+                           res.status(406).json({
+                        message_class: 'error',
+                        message: "NO MOVIES FOUND WITH THAT YEAR"
+                    })})
+         
+		}
+
 		 database.getmovies()
                 .then(function (local) {
                     res.status(200).send(local.rows);
@@ -49,9 +63,8 @@ module.exports = function(app){
                         message_class: 'error',
                         message: "NO MOVIES FOUND"
                     })})
-
-
-	});
+            });
+		
 
 	app.post('/movies', function(req, res, next) {
 
