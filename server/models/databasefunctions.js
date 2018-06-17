@@ -50,7 +50,7 @@ exports.getmoviessimple = function () {
 }
 
 exports.getmovies = function (sortby) {
-  console.log("hello nighga");
+  console.log(sortby);
   if(sortby == 'year'){
  return new Promise(function (resolve, reject) {
   client.query("SELECT * FROM movies ORDER BY movies.year",
