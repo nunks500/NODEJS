@@ -38,9 +38,9 @@ module.exports = function(app){
      }
 
  });
-	
+
 	app.get('/', function(req, res, next) {
-		res.sendFile(path.resolve('../App/views/index.html'));
+		res.sendFile(path.resolve('../App/src/index.html'));
 	});
 
 	app.get('/movies', function(req, res, next) {
