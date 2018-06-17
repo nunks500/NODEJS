@@ -47,7 +47,7 @@ module.exports = function(app){
 
 	 var movie = encodeURIComponent(req.body.movietitle);
 	 var Year,Genre;
-	 console.log(movie);
+	 
 	    http.get({
         host: 'omdbapi.com',
         path: '/?t=' + movie +'&apikey=8adb7f03'
@@ -61,10 +61,13 @@ module.exports = function(app){
 
             // Data reception is done, do whatever with it!
             var parsed = JSON.parse(body);
-            console.log(parsed);
+            
             Year = parsed.Year;
+            Genre = parsed.Genre;
         });
     });
+	    		console.log(Year);
+	    		console.log(Genre);
 	            res.status(200).json({
                     message: Year
 
