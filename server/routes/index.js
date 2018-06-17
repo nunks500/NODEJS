@@ -71,24 +71,13 @@ module.exports = function(app){
         	database.insertmovie(req.body.movietitle,year,genre)
         	.then(function (result) {
         		res.status(200).json(parsed)
+        		})
         		.catch(function (err) {
         			res.status(406).json({
         				message_class: 'error',
         				message: "ERROR PRODUCT"
         			})});
-        	})
-        	.catch(err => 
-        		{ 
-        			console.log(err); next(err) 
         		});
-
-        });
-
-    }).on('error', function(err) {
-        // handle errors with the request itself
-        console.error('Error with the request:', err.message);
-        cb(err);
-
-		});
+    	});
 	});
 }
