@@ -63,8 +63,8 @@ module.exports = function(app){
         });
     });
 
-	 var year = parsed.Year;
-	 var genre = parsed.Genre;
+	 var year = data.Year;
+	 var genre = data.Genre;
 	 console.log(genre);
 	 console.log(year);
 
