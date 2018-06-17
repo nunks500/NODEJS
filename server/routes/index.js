@@ -48,12 +48,14 @@ module.exports = function(app){
 	 console.log(req);	
 	 var movie = encodeURIComponent(req.body.movietitle);
 	 var Year,Genre;
-
+	 console.log(movie);
 	    http.get({
         host: 'http://www.omdbapi.com',
         path: '/?t=' + movie +'&apikey=8adb7f03'
     }, function(response) {
         // Continuously update stream with data
+
+        console.log(response);
         var body = '';
         response.on('data', function(d) {
             body += d;
