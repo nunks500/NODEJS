@@ -58,15 +58,21 @@ module.exports = function(app){
         });
         response.on('end', function() {
 
-        	var parsed = JSON.parse(body);
+        	try {
+        		var parsed = JSON.parse(body);
+        	} catch (err) {
+        		console.error('Unable to parse response as JSON', err);
+        		return cb(err);
+        	}
+
         	var year = parsed.Year;
         	var genre = parsed.Genre;
 
         	database.insertmovie(req.body.movietitle,year,genre)
-        	.then(function (rq) {
-        		rq.status(200).json(parsed)
+        	.then(function (result) {
+        		res.status(200).json(parsed)
         		.catch(function (err) {
-        			rq.status(406).json({
+        			res.status(406).json({
         				message_class: 'error',
         				message: "ERROR PRODUCT"
         			})});
@@ -74,6 +80,10 @@ module.exports = function(app){
 
         });
 
-    });
+    }).on('error', function(err) {
+        // handle errors with the request itself
+        console.error('Error with the request:', err.message);
+        cb(err);
+
 	});
 }
