@@ -76,7 +76,11 @@ module.exports = function(app){
         				message_class: 'error',
         				message: "ERROR PRODUCT"
         			})});
-        	});
+        	})
+        	.catch(err => 
+        		{ 
+        			console.log(err); next(err) 
+        		});
 
         });
 
