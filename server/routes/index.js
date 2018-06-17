@@ -62,9 +62,12 @@ module.exports = function(app){
         });
     });
 
+	 console.log(data);
 	 var parsed = JSON.parse(data);
 	 var year = parsed.Year;
-	 var genre = parsed.Genre;
+	 var genre = data.Genre;
+	 console.log(genre);
+	 console.log(year);
 
 /*
 	 database.insertmovie(req.body.movietitle,year,genre)
