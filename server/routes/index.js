@@ -84,7 +84,7 @@ module.exports = function(app){
                     })})
 				 }
 				 else{
-				 database.getmoviesbygenre(req.query.genre)
+				 database.getmoviesbygenresimple(req.query.genre)
                 .then(function (local) {
                     res.status(200).send(local.rows);
                 })
@@ -110,7 +110,7 @@ module.exports = function(app){
                     })})
             }
         else{
-        			 database.getmovies()
+        			 database.getmoviessimple()
                 .then(function (local) {
                     res.status(200).send(local.rows);
                 })

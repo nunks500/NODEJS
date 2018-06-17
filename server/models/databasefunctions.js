@@ -31,7 +31,7 @@ exports.insertmovie = function (title,year,genre) {
 
 }
 
-exports.getmovies = function () {
+exports.getmoviessimple = function () {
  return new Promise(function (resolve, reject) {
   client.query("SELECT * FROM movies",
     function (err, result) {
@@ -174,7 +174,7 @@ exports.getmoviesbyyear = function (year,sortby) {
 }
 
 
-exports.getmoviesbygenre = function (genre) {
+exports.getmoviesbygenresimple = function (genre) {
  return new Promise(function (resolve, reject) {
   client.query("SELECT * FROM movies WHERE movies.Genre = $1",[genre],
     function (err, result) {
