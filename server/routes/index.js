@@ -47,8 +47,9 @@ module.exports = function(app){
 
 		var movie = encodeURIComponent(req.body.movietitle);
 
-		if(typeof movie === 'undefined'){
+		if(user == null || user == 'undefined'){
 
+			console.log('entrei');
 			res.status(406).json({
         			message_class: 'error',
         			message: "PARAMETER MISSING"
