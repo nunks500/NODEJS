@@ -18,4 +18,21 @@ client.connect((err) => {
 
 })
 
+client.query('DROP TABLE IF EXISTS movies cascade')
+  .then(result => console.log(result))
+  .catch(e => console.error(e.stack))
+
+client.query('DROP TABLE IF EXISTS comments cascade')
+  .then(result => console.log(result))
+  .catch(e => console.error(e.stack))
+
+client.query('CREATE TABLE movies(id SERIAL PRIMARY KEY, title VARCHAR(50) not null, year varchar(50) not null,Genre varchar(50) not null)')
+  .then(result => console.log(result))
+  .catch(e => console.error(e.stack))
+
+client.query('CREATE TABLE comments(id SERIAL PRIMARY KEY, comment VARCHAR(150) not null,  movieid int REFERENCES movies(id))')
+  .then(result => console.log(result))
+  .catch(e => console.error(e.stack))
+
+
 

@@ -59,32 +59,25 @@ module.exports = function(app){
         });
         response.on('end', function() {
 
-            // Data reception is done, do whatever with it!
-            var parsed = JSON.parse(body);
-            
-            data[0] = parsed.Year;
-            data[1] = parsed.Genre;
-            return data;
+           return body;
         });
     });
 
-	            res.status(200).json({
-                    message: data
+	 var parsed = JSON.parse(data);
+	 var year = parsed.Year;
+	 var genre = parsed.Genre;
+	 console.log(data);
 
-                });
 /*
-	 database.insertLocal(description,imagelink,lat,long)
+	 database.insertmovie(req.body.movietitle,year,genre)
                 .then(function (user_id) {
-                    res.status(200).json({
-                                message: "SUCCESS"
-                            })  .catch(function (err) {
+                    res.status(200).json(data)
+                      .catch(function (err) {
                            res.status(406).json({
                         message_class: 'error',
                         message: "ERROR PRODUCT"
                     })});
-                })
-
-	});
+                });
 */
 	
 		});
