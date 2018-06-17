@@ -46,9 +46,9 @@ module.exports = function(app){
 	app.post('/movies', function(req, res, next) {
 
 	 var movie = encodeURIComponent(req.body.movietitle);
-	 var Year,Genre;
 	 
-	    http.get({
+	 
+	 var data = http.get({
         host: 'omdbapi.com',
         path: '/?t=' + movie +'&apikey=8adb7f03'
     }, function(response) {
@@ -62,14 +62,14 @@ module.exports = function(app){
             // Data reception is done, do whatever with it!
             var parsed = JSON.parse(body);
             
-            Year = parsed.Year;
-            Genre = parsed.Genre;
+            data[0] = parsed.Year;
+            data[1] = parsed.Genre;
+            return data;
         });
     });
-	    		console.log(Year);
-	    		console.log(Genre);
+
 	            res.status(200).json({
-                    message: Year
+                    message: data
 
                 });
 /*
