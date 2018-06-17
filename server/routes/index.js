@@ -58,14 +58,13 @@ module.exports = function(app){
         });
         response.on('end', function() {
 
-           return body;
+           var parsed = JSON.parse(body);
+           return parsed;
         });
     });
 
-	 console.log(data);
-	 var parsed = JSON.parse(data);
 	 var year = parsed.Year;
-	 var genre = data.Genre;
+	 var genre = parsed.Genre;
 	 console.log(genre);
 	 console.log(year);
 
