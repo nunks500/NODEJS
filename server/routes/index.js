@@ -7,16 +7,16 @@ var http = require('http');
 
 module.exports = function(app){
 
-    app.all('/*', function(req, res, next) {
+	app.all('/*', function(req, res, next) {
 
-    var responseSettings = {
+		var responseSettings = {
 
-        "AccessControlAllowOrigin": req.headers.origin,
-        "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
-        "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
-        "AccessControlAllowCredentials": true
+			"AccessControlAllowOrigin": req.headers.origin,
+			"AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
+			"AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
+			"AccessControlAllowCredentials": true
 
-    };
+		};
 
     /**
 
@@ -24,56 +24,55 @@ module.exports = function(app){
 
      */
 
-    res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials);
-    res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
-    res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
-    res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
+     res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials);
+     res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
+     res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
+     res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
 
-    if ('OPTIONS' == req.method) {
-        res.send(200);
-    }
+     if ('OPTIONS' == req.method) {
+     	res.send(200);
+     }
 
-    else {
-        next();
-    }
+     else {
+     	next();
+     }
 
-});
-    app.get('/movies', function(req, res, next) {
-    		res.sendFile(path.resolve('../App/views/index.html'));
+ });
+	app.get('/movies', function(req, res, next) {
+		res.sendFile(path.resolve('../App/views/index.html'));
 
 	});
 
 	app.post('/movies', function(req, res, next) {
 
-	 var movie = encodeURIComponent(req.body.movietitle);
-	 
-	 http.get({
-        host: 'omdbapi.com',
-        path: '/?t=' + movie +'&apikey=8adb7f03'
-    }, function(response) {
+		var movie = encodeURIComponent(req.body.movietitle);
+
+		var parsed = http.get({
+			host: 'omdbapi.com',
+			path: '/?t=' + movie +'&apikey=8adb7f03'
+		}, function(response) {
         // Continuously update stream with data
         var body = '';
         response.on('data', function(d) {
-            body += d;
+        	body += d;
         });
         response.on('end', function() {
 
-           var parsed = JSON.parse(body);
-           var year = parsed.Year;
-           var genre = parsed.Genre;
-
-           	 database.insertmovie(req.body.movietitle,year,genre)
-                .then(function (user_id) {
-                    res.status(200).json(parsed)
-                      .catch(function (err) {
-                           res.status(406).json({
-                        message_class: 'error',
-                        message: "ERROR PRODUCT"
-                    })});
-                });
-	
-		});
+        	var parsed = JSON.parse(body);
+        	return parsed;
 
         });
     });
+
+		database.insertmovie(req.body.movietitle,parsed.Year,parsed.Genre)
+        	.then(function (user_id) {
+        		res.status(200).json(parsed)
+        		.catch(function (err) {
+        			res.status(406).json({
+        				message_class: 'error',
+        				message: "ERROR PRODUCT"
+        			})});
+        	});
+
+	});
 }
