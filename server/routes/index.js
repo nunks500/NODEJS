@@ -46,7 +46,7 @@ module.exports = function(app){
 	app.post('/movies', function(req, res, next) {
 
 	 console.log(req);	
-	 var movie = req.body.movietitle;
+	 var movie = value = encodeURIComponent(req.body.movietitle);
 	 var Year,Genre;
 
 	    http.get({
