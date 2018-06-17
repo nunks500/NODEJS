@@ -15,5 +15,18 @@ client.connect((err) => {
   } else {
     console.log('connected');
   }
-
 })
+
+     exports.insertmovie = function (title,year,genre) {
+       return new Promise(function (resolve, reject) {
+                          client.query("INSERT INTO movies(title,year,genre) VALUES ($1, $2, $3)",[title,year,genre],
+                          function (err, result) {
+                                    if (err) {
+                                        reject(err);
+                                    } else {
+                                        resolve(result);
+                                    }
+                                });
+                        });
+
+    }

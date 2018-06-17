@@ -64,9 +64,8 @@ module.exports = function(app){
 
 	 var year = data.Year;
 	 var genre = data.Genre;
-	 console.log(data);
 
-/*
+
 	 database.insertmovie(req.body.movietitle,year,genre)
                 .then(function (user_id) {
                     res.status(200).json(data)
@@ -76,7 +75,6 @@ module.exports = function(app){
                         message: "ERROR PRODUCT"
                     })});
                 });
-*/
 	
 		});
 	}
