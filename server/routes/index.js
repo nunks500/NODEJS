@@ -39,7 +39,17 @@ module.exports = function(app){
 
  });
 	app.get('/movies', function(req, res, next) {
-		res.sendFile(path.resolve('../App/views/index.html'));
+		//res.sendFile(path.resolve('../App/views/index.html'));
+		 database.getmovies()
+                .then(function (local) {
+                    res.status(200).send(local.rows);
+                })
+                .catch(function (err) {
+                           res.status(406).json({
+                        message_class: 'error',
+                        message: "NO MOVIES FOUND"
+                    })})
+
 
 	});
 
@@ -49,11 +59,10 @@ module.exports = function(app){
 
 		if(req.body.movietitle == null || req.body.movietitle == 'undefined'){
 
-			console.log('entrei');
 			res.status(406).json({
-        			message_class: 'error',
-        			message: "PARAMETER MISSING"
-        		});
+				message_class: 'error',
+				message: "PARAMETER MISSING"
+			});
 		}
 
 		http.get({

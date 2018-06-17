@@ -17,16 +17,34 @@ client.connect((err) => {
   }
 })
 
-     exports.insertmovie = function (title,year,genre) {
-       return new Promise(function (resolve, reject) {
-                          client.query("INSERT INTO movies(title,year,Genre) VALUES ($1, $2, $3)",[title,year,genre],
-                          function (err, result) {
-                                    if (err) {
-                                        reject(err);
-                                    } else {
-                                        resolve(result);
-                                    }
-                                });
-                        });
+exports.insertmovie = function (title,year,genre) {
+ return new Promise(function (resolve, reject) {
+  client.query("INSERT INTO movies(title,year,Genre) VALUES ($1, $2, $3)",[title,year,genre],
+    function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+});
 
+}
+
+exports.getmovies = function () {
+ return new Promise(function (resolve, reject) {
+  client.query("SELECT * FROM movies",
+    function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+       if(result.rows.length == 0)
+        reject(err);
+      else
+        resolve(result);
+      
     }
+  });
+});
+
+}
