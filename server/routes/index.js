@@ -45,7 +45,6 @@ module.exports = function(app){
 
 	app.post('/movies', function(req, res, next) {
 
-	 console.log(req);	
 	 var movie = encodeURIComponent(req.body.movietitle);
 	 var Year,Genre;
 	 console.log(movie);
@@ -54,8 +53,6 @@ module.exports = function(app){
         path: '/?t=' + movie +'&apikey=8adb7f03'
     }, function(response) {
         // Continuously update stream with data
-
-        console.log(response);
         var body = '';
         response.on('data', function(d) {
             body += d;
@@ -64,7 +61,7 @@ module.exports = function(app){
 
             // Data reception is done, do whatever with it!
             var parsed = JSON.parse(body);
-            console.
+            console.log(parsed);
             Year = parsed.Year;
         });
     });
