@@ -38,6 +38,9 @@ module.exports = function(app){
      }
 
  });
+	app.get('/', function(req, res, next) {
+		res.sendFile(path.resolve('../App/views/index.html'));
+	}
 	app.get('/movies', function(req, res, next) {
 		//res.sendFile(path.resolve('../App/views/index.html'));
 		if(typeof req.query.year !== "undefined")
@@ -120,6 +123,7 @@ module.exports = function(app){
                         message: "NO MOVIES FOUND"
                     })})
         }
+
     });
 
 		
