@@ -99,7 +99,7 @@ module.exports = function(app){
 		}
 		
 		if(typeof req.query.sortby !== "undefined"){
-		 database.getmovies(req.query.sort)
+		 database.getmovies(req.query.sortby)
                 .then(function (local) {
                     res.status(200).send(local.rows);
                 })
