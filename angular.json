@@ -4,8 +4,8 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular5-example": {
-      "root": "app",
-      "sourceRoot": "app",
+      "root": "src",
+      "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {},
@@ -17,10 +17,10 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "../src/tsconfig.app.json",
+            "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "app/src/favicon.ico",
-              "app/src/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
