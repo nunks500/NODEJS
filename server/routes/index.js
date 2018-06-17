@@ -40,7 +40,7 @@ module.exports = function(app){
  });
 
 	app.get('/', function(req, res, next) {
-		res.sendFile(path.resolve('app/src/index.html'));
+		res.sendFile('app/src/index.html');
 	});
 
 	app.get('/movies', function(req, res, next) {
