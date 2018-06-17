@@ -42,8 +42,8 @@ module.exports = function(app){
 		//res.sendFile(path.resolve('../App/views/index.html'));
 		if(typeof req.query.year !== "undefined")
 		{
-				console.log(req.query.year);
-				 database.getmoviesbyyear(req.query.year)
+				 if(typeof req.query.sortby !== "undefined"){
+				 database.getmoviesbyyear(req.query.year,req.query.sortby)
                 .then(function (local) {
                     res.status(200).send(local.rows);
                 })
@@ -52,11 +52,37 @@ module.exports = function(app){
                         message_class: 'error',
                         message: "NO MOVIES FOUND WITH THAT YEAR"
                     })})
+            }
+            else
+            {
+            	database.getmoviesbyyear(req.query.year)
+                .then(function (local) {
+                    res.status(200).send(local.rows);
+                })
+                .catch(function (err) {
+                           res.status(406).json({
+                        message_class: 'error',
+                        message: "NO MOVIES FOUND WITH THAT YEAR"
+                    })})
+            }
+
+            return;
          
 		}
 		else if(typeof req.query.genre !== "undefined")
 		{
-				 console.log(req.query.genre);
+				 if(typeof req.query.sortby !== "undefined"){
+				 	database.getmoviesbygenre(req.query.genre,req.query.sortby)
+                .then(function (local) {
+                    res.status(200).send(local.rows);
+                })
+                .catch(function (err) {
+                           res.status(406).json({
+                        message_class: 'error',
+                        message: "NO MOVIES FOUND WITH THAT GENRE"
+                    })})
+				 }
+				 else{
 				 database.getmoviesbygenre(req.query.genre)
                 .then(function (local) {
                     res.status(200).send(local.rows);
@@ -66,10 +92,13 @@ module.exports = function(app){
                         message_class: 'error',
                         message: "NO MOVIES FOUND WITH THAT GENRE"
                     })})
+            }
+                return;
          
 		}
-		console.log("alo");
-		 database.getmovies()
+		
+		if(typeof req.query.sortby !== "undefined"){
+		 database.getmovies(req.query.sort)
                 .then(function (local) {
                     res.status(200).send(local.rows);
                 })
@@ -78,7 +107,20 @@ module.exports = function(app){
                         message_class: 'error',
                         message: "NO MOVIES FOUND"
                     })})
-            });
+            }
+        else{
+        			 database.getmovies()
+                .then(function (local) {
+                    res.status(200).send(local.rows);
+                })
+                .catch(function (err) {
+                           res.status(406).json({
+                        message_class: 'error',
+                        message: "NO MOVIES FOUND"
+                    })})
+        }
+    });
+
 		
 
 	app.post('/movies', function(req, res, next) {

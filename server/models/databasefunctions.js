@@ -49,6 +49,58 @@ exports.getmovies = function () {
 
 }
 
+exports.getmovies = function (sortby) {
+  if(sortby == 'year'){
+ return new Promise(function (resolve, reject) {
+  client.query("SELECT * FROM movies ORDER BY movies.year",
+    function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+       if(result.rows.length == 0)
+        reject(err);
+      else
+        resolve(result);
+      
+    }
+  });
+});
+}
+else if(sortby == 'genre'){
+   return new Promise(function (resolve, reject) {
+  client.query("SELECT * FROM movies ORDER BY movies.Genre",
+    function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+       if(result.rows.length == 0)
+        reject(err);
+      else
+        resolve(result);
+      
+    }
+  });
+});
+}
+else if(sortby == 'title'){
+   return new Promise(function (resolve, reject) {
+  client.query("SELECT * FROM movies ORDER BY movies.title",
+    function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+       if(result.rows.length == 0)
+        reject(err);
+      else
+        resolve(result);
+      
+    }
+  });
+});
+}
+
+}
+
 exports.getmoviesbyyear = function (year) {
  return new Promise(function (resolve, reject) {
   client.query("SELECT * FROM movies WHERE movies.year = $1",[year],
@@ -67,6 +119,59 @@ exports.getmoviesbyyear = function (year) {
 
 }
 
+exports.getmoviesbyyear = function (year,sortby) {
+  if(sortby == 'year'){
+   return new Promise(function (resolve, reject) {
+    client.query("SELECT * FROM movies WHERE movies.year = $1 ORDER BY movies.year",[year],
+      function (err, result) {
+        if (err) {
+          reject(err);
+        } else {
+         if(result.rows.length == 0)
+          reject(err);
+        else
+          resolve(result);
+
+      }
+    });
+  });
+ }
+ else if(sortby == 'genre'){
+   return new Promise(function (resolve, reject) {
+    client.query("SELECT * FROM movies WHERE movies.year = $1 ORDER BY movies.Genre",[year],
+      function (err, result) {
+        if (err) {
+          reject(err);
+        } else {
+         if(result.rows.length == 0)
+          reject(err);
+        else
+          resolve(result);
+
+      }
+    });
+  });
+ }
+ else if (sortby == 'title'){
+   return new Promise(function (resolve, reject) {
+    client.query("SELECT * FROM movies WHERE movies.year = $1 ORDER BY movies.title",[year],
+      function (err, result) {
+        if (err) {
+          reject(err);
+        } else {
+         if(result.rows.length == 0)
+          reject(err);
+        else
+          resolve(result);
+
+      }
+    });
+  });
+ }
+
+}
+
+
 exports.getmoviesbygenre = function (genre) {
  return new Promise(function (resolve, reject) {
   client.query("SELECT * FROM movies WHERE movies.Genre = $1",[genre],
@@ -82,5 +187,58 @@ exports.getmoviesbygenre = function (genre) {
     }
   });
 });
+
+}
+
+exports.getmoviesbygenre = function (genre,sortby) {
+  if(sortby == 'year'){
+   return new Promise(function (resolve, reject) {
+    client.query("SELECT * FROM movies WHERE movies.Genre = $1 ORDER BY movies.year",[genre],
+      function (err, result) {
+        if (err) {
+          reject(err);
+        } else {
+         if(result.rows.length == 0)
+          reject(err);
+        else
+          resolve(result);
+
+      }
+    });
+  });
+ }
+ else if(sortby == 'genre'){
+   return new Promise(function (resolve, reject) {
+    client.query("SELECT * FROM movies WHERE movies.Genre = $1 ORDER BY movies.Genre",[genre],
+      function (err, result) {
+        if (err) {
+          reject(err);
+        } else {
+         if(result.rows.length == 0)
+          reject(err);
+        else
+          resolve(result);
+
+      }
+    });
+  });
+ }
+ else if(sortby == 'title'){
+   return new Promise(function (resolve, reject) {
+    client.query("SELECT * FROM movies WHERE movies.Genre = $1 ORDER BY movies.title",[genre],
+      function (err, result) {
+        if (err) {
+          reject(err);
+        } else {
+         if(result.rows.length == 0)
+          reject(err);
+        else
+          resolve(result);
+
+      }
+    });
+  });
+ }
+
 
 }
