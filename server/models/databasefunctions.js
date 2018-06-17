@@ -67,6 +67,7 @@ exports.getmovies = function (sortby) {
 });
 }
 else if(sortby == 'genre'){
+  console.log('entrei fds');
    return new Promise(function (resolve, reject) {
   client.query("SELECT * FROM movies ORDER BY movies.Genre",
     function (err, result) {
