@@ -78,6 +78,10 @@ module.exports = function(app){
         				message: "ERROR PRODUCT"
         			})});
         		});
+    	}).on('error', function(err) {
+        // handle errors with the request itself
+        console.error('Error with the request:', err.message);
+        cb(err);
     	});
 	});
 }
