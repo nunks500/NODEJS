@@ -47,7 +47,7 @@ module.exports = function(app){
 
 		var movie = encodeURIComponent(req.body.movietitle);
 
-		var parsed = http.get({
+		http.get({
 			host: 'omdbapi.com',
 			path: '/?t=' + movie +'&apikey=8adb7f03'
 		}, function(response) {
@@ -59,12 +59,10 @@ module.exports = function(app){
         response.on('end', function() {
 
         	var parsed = JSON.parse(body);
-        	return parsed;
+        	var year = parsed.Year;
+        	var genre = parsed.Genre;
 
-        });
-    });
-
-		database.insertmovie(req.body.movietitle,parsed.Year,parsed.Genre)
+        	database.insertmovie(req.body.movietitle,year,genre)
         	.then(function (user_id) {
         		res.status(200).json(parsed)
         		.catch(function (err) {
@@ -74,5 +72,8 @@ module.exports = function(app){
         			})});
         	});
 
+        });
+
+    });
 	});
 }
