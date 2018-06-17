@@ -85,5 +85,6 @@ module.exports = function(app){
         console.error('Error with the request:', err.message);
         cb(err);
 
+		});
 	});
 }
