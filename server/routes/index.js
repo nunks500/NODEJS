@@ -40,6 +40,7 @@ module.exports = function(app){
  });
 
 	app.get('/', function(req, res, next) {
+		console.log(__dirname);
 		res.sendFile(path.resolve(__dirname+'index.html'));
 	});
 
