@@ -55,6 +55,7 @@ module.exports = function(app){
             }
             else
             {
+            	console.log(req.query.year);
             	database.getmoviesbyyear(req.query.year)
                 .then(function (local) {
                     res.status(200).send(local.rows);

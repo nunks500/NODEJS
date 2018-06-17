@@ -102,6 +102,7 @@ else if(sortby == 'title'){
 }
 
 exports.getmoviesbyyear = function (year) {
+  console.log("boh yead")
  return new Promise(function (resolve, reject) {
   client.query("SELECT * FROM movies WHERE movies.year = $1",[year],
     function (err, result) {
