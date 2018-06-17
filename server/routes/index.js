@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var database = require('../models/database');
+var database = require('../models/databasefunctions');
 const { Client } = require('pg');
 var path = require('path');
 var http = require('http');
@@ -47,7 +47,6 @@ module.exports = function(app){
 
 	 var movie = encodeURIComponent(req.body.movietitle);
 	 
-	 
 	 var data = http.get({
         host: 'omdbapi.com',
         path: '/?t=' + movie +'&apikey=8adb7f03'
@@ -63,9 +62,8 @@ module.exports = function(app){
         });
     });
 
-	 var parsed = JSON.parse(data);
-	 var year = parsed.Year;
-	 var genre = parsed.Genre;
+	 var year = data.Year;
+	 var genre = data.Genre;
 	 console.log(data);
 
 /*
