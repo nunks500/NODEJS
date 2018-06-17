@@ -47,7 +47,7 @@ module.exports = function(app){
 
 		var movie = encodeURIComponent(req.body.movietitle);
 
-		if(user == null || user == 'undefined'){
+		if(req.body.movietitle == null || req.body.movietitle == 'undefined'){
 
 			console.log('entrei');
 			res.status(406).json({
