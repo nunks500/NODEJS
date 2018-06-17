@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular5-example": {
-      "root": "app",
+      "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
@@ -14,16 +14,16 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/angular5-example",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "index": "app/src/index.html",
+            "main": "app/src/main.ts",
+            "polyfills": "app/src/polyfills.ts",
+            "tsConfig": "app/src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "app/src/favicon.ico",
+              "app/src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "app/src/styles.css"
             ],
             "scripts": []
           },
@@ -31,8 +31,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "app/src/environments/environment.ts",
+                  "with": "app/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
