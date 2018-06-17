@@ -63,10 +63,10 @@ module.exports = function(app){
         	var genre = parsed.Genre;
 
         	database.insertmovie(req.body.movietitle,year,genre)
-        	.then(function (user_id) {
-        		res.status(200).json(parsed)
+        	.then(function (rq) {
+        		rq.status(200).json(parsed)
         		.catch(function (err) {
-        			res.status(406).json({
+        			rq.status(406).json({
         				message_class: 'error',
         				message: "ERROR PRODUCT"
         			})});
