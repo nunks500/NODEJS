@@ -66,3 +66,21 @@ exports.getmoviesbyyear = function (year) {
 });
 
 }
+
+exports.getmoviesbygenre = function (genre) {
+ return new Promise(function (resolve, reject) {
+  client.query("SELECT * FROM movies WHERE movies.Genre = $1",[genre],
+    function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+       if(result.rows.length == 0)
+        reject(err);
+      else
+        resolve(result);
+      
+    }
+  });
+});
+
+}

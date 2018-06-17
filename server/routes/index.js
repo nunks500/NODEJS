@@ -40,7 +40,7 @@ module.exports = function(app){
  });
 	app.get('/movies', function(req, res, next) {
 		//res.sendFile(path.resolve('../App/views/index.html'));
-		if(req.query.year != null || req.query.year != 'undefined')
+		if(typeof req.query.year !== "undefined")
 		{
 				 database.getmoviesbyyear(req.query.year)
                 .then(function (local) {
@@ -50,6 +50,19 @@ module.exports = function(app){
                            res.status(406).json({
                         message_class: 'error',
                         message: "NO MOVIES FOUND WITH THAT YEAR"
+                    })})
+         
+		}
+		else if(typeof req.query.genre !== "undefined")
+		{
+				 database.getmoviesbygenre(req.query.genre)
+                .then(function (local) {
+                    res.status(200).send(local.rows);
+                })
+                .catch(function (err) {
+                           res.status(406).json({
+                        message_class: 'error',
+                        message: "NO MOVIES FOUND WITH THAT GENRE"
                     })})
          
 		}
