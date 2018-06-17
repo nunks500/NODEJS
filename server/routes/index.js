@@ -42,6 +42,7 @@ module.exports = function(app){
 		//res.sendFile(path.resolve('../App/views/index.html'));
 		if(typeof req.query.year !== "undefined")
 		{
+				console.log(req.query.year);
 				 database.getmoviesbyyear(req.query.year)
                 .then(function (local) {
                     res.status(200).send(local.rows);
@@ -55,6 +56,7 @@ module.exports = function(app){
 		}
 		else if(typeof req.query.genre !== "undefined")
 		{
+				 console.log(req.query.genre);
 				 database.getmoviesbygenre(req.query.genre)
                 .then(function (local) {
                     res.status(200).send(local.rows);
@@ -66,7 +68,7 @@ module.exports = function(app){
                     })})
          
 		}
-
+		console.log("alo");
 		 database.getmovies()
                 .then(function (local) {
                     res.status(200).send(local.rows);
