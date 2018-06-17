@@ -14,16 +14,16 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/angular5-example",
-            "index": "app/src/index.html",
-            "main": "app/src/main.ts",
-            "polyfills": "app/src/polyfills.ts",
-            "tsConfig": "app/src/tsconfig.app.json",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "app/src/favicon.ico",
-              "app/src/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
-              "app/src/styles.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -31,8 +31,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "app/src/environments/environment.ts",
-                  "with": "app/src/environments/environment.prod.ts"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
