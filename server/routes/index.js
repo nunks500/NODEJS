@@ -77,7 +77,6 @@ module.exports = function(app){
 
     app.get('/comments', function(req, res, next) {
 
-        console.log(req.query.movieid);
         if(typeof req.query.movieid == "undefined"){
 
            database.getcomments()
@@ -93,7 +92,7 @@ module.exports = function(app){
            return;
 
        }
-       console.log("reeee");
+       
        database.getcommentsbymovie(req.query.movieid)
        .then(function (local) {
             res.status(200).send(local.rows);
@@ -101,7 +100,7 @@ module.exports = function(app){
        .catch(function (err) {
          res.status(406).json({
             message_class: 'error',
-            message: "NO COMMENTS FOUND WITH THAT ID"
+            message: "NO COMMENTS FOUND FOR THAT MOVIE ID"
         })})
 
 
