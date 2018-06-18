@@ -41,7 +41,7 @@ module.exports = function(app){
 
 	app.post('/comments', function(req, res, next) {
 
-		if(req.body.id == null || req.body.id == 'undefined' || req.body.comment == null || req.body.comment == 'undefined'){
+		if(req.body.movieid == null || req.body.movieid == 'undefined' || req.body.comment == null || req.body.comment == 'undefined'){
             res.status(406).json({
                 message_class: 'error',
                 message: "PARAMETERS NOT WELL DEFINED"
@@ -49,10 +49,10 @@ module.exports = function(app){
             return;
         }
 
-        database.getmoviesID(req.body.id)
+        database.getmoviesID(req.body.movieid)
         .then(function (local) {
 
-            database.insertcomment(req.body.id,req.body.comment)
+            database.insertcomment(req.body.movieid,req.body.comment)
             .then(function (local) {
 
                 res.status(200).send(req.body.comment);
