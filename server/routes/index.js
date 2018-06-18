@@ -41,6 +41,7 @@ module.exports = function(app){
 
 	app.post('/comments', function(req, res, next) {
 
+        //verifies if post has movieid and comment, if not gives error
 		if(req.body.movieid == null || req.body.movieid == 'undefined' || req.body.comment == null || req.body.comment == 'undefined'){
             res.status(406).json({
                 message_class: 'error',
@@ -49,6 +50,7 @@ module.exports = function(app){
             return;
         }
 
+        //verifies if movieid exists and if yes, inserts the comment
         database.getmoviesID(req.body.movieid)
         .then(function (local) {
 
@@ -77,6 +79,7 @@ module.exports = function(app){
 
     app.get('/comments', function(req, res, next) {
 
+        //if get request has no movieid return all comments
         if(typeof req.query.movieid == "undefined"){
 
            database.getcomments()
@@ -92,7 +95,8 @@ module.exports = function(app){
            return;
 
        }
-       
+      
+       //if it has movieid get comments for that movie
        database.getcommentsbymovie(req.query.movieid)
        .then(function (local) {
             res.status(200).send(local.rows);
@@ -107,9 +111,11 @@ module.exports = function(app){
    });
 
     app.get('/movies', function(req, res, next) {
-		//res.sendFile(path.resolve('../App/views/index.html'));
+		
+        //if get request has year field
 		if(typeof req.query.year !== "undefined")
 		{
+            //if get request has sortby field
            if(typeof req.query.sortby !== "undefined"){
                database.getmoviesbyyear(req.query.year,req.query.sortby)
                .then(function (local) {
@@ -138,10 +144,10 @@ module.exports = function(app){
            return;
 
        }
-       else if(typeof req.query.genre !== "undefined")
+       else if(typeof req.query.genre !== "undefined") //if get request wants to find movies with a specific genre
        {
            if(typeof req.query.sortby !== "undefined"){
-              database.getmoviesbygenre(req.query.genre,req.query.sortby)
+              database.getmoviesbygenre(req.query.genre,req.query.sortby) //if it is getting sorted
               .then(function (local) {
                 res.status(200).send(local.rows);
             })
@@ -151,7 +157,7 @@ module.exports = function(app){
                     message: "NO MOVIES FOUND WITH THAT GENRE"
                 })})
           }
-          else{
+          else{ //if request doesnt want sorted json
            database.getmoviesbygenresimple(req.query.genre)
            .then(function (local) {
             res.status(200).send(local.rows);
@@ -205,7 +211,7 @@ module.exports = function(app){
         });
      }
 
-     http.get({
+     http.get({ //calls api
          host: 'omdbapi.com',
          path: '/?t=' + movie +'&apikey=8adb7f03'
      }, function(response) {
@@ -226,7 +232,7 @@ module.exports = function(app){
         	var year = parsed.Year;
         	var genre = parsed.Genre;
 
-        	database.insertmovie(req.body.movietitle,year,genre)
+        	database.insertmovie(req.body.movietitle,year,genre) //insert movie in the database with information fetched
         	.then(function (result) {
         		res.status(200).json(parsed)
         	})
