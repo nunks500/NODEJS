@@ -1,27 +1,37 @@
-# Angular5Example
+NODEJS Movies/Comments Test
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+The requested API's are implemented some with sorting/filtering as requested:
+They are allocated in heroku server so if interested in calling them just call them with the provided arguments
 
-## Development server
+- http://moviesnodejs.herokuapp.com/movies - GET- Returns all movies existing in the database. Also supports filtering and sorting as requested. Example of requests:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+ http://moviesnodejs.herokuapp.com/movies?year=1996
+ http://moviesnodejs.herokuapp.com/movies?sortby=year
+ 
+ Basically it supports sorts the information either by year or genre. It also can fetch all the movies that belong to a certain genre or year.
 
-## Code scaffolding
+-  http://moviesnodejs.herokuapp.com/movies - POST - The API connects with the  http://www.omdbapi.com/ server to extract data(I chose to extract Genre and Year, since it was not specified although a lot more could be chosen) using the title of the name provided and stores the information in the database. Also returns the objected caught by the omdbapi API as requested
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Example:
 
-## Build
+http://moviesnodejs.herokuapp.com/movies
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+{
+	"movietitle":"Finding Nemo"
+}
 
-## Running unit tests
+-  http://moviesnodejs.herokuapp.com/comments - GET - Gets all comments of all the movies. Supports also some filtering with the movie ID as requested.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Example:
 
-## Running end-to-end tests
+http://moviesnodejs.herokuapp.com/comments
+http://moviesnodejs.herokuapp.com/comments?movieid=13
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+-  http://moviesnodejs.herokuapp.com/comments - POST - Post a new comment regarding a movie by passing movie ID. If the ID is not found it throws an error. Example below:
 
-## Further help
+{
+  "movieid":"20",
+  "comment": "Very nice"
+}
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+While I tried to implement Angular 6.0 interface, Heroku proved to be a bit hard to deal with, therefore lack of time, which did not allow to make a functional demo of the frontend part
