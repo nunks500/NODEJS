@@ -8,6 +8,7 @@ They are allocated in heroku server so if interested in calling them just call t
 **Example of requests:**
 
  http://moviesnodejs.herokuapp.com/movies?year=1996
+ 
  http://moviesnodejs.herokuapp.com/movies?sortby=year
  
  Basically it supports sorts the information either by year or genre. It also can fetch all the movies that belong to a certain genre or year.
@@ -29,6 +30,7 @@ http://moviesnodejs.herokuapp.com/movies
 **Example:**
 
 http://moviesnodejs.herokuapp.com/comments
+
 http://moviesnodejs.herokuapp.com/comments?movieid=13
 
 -  http://moviesnodejs.herokuapp.com/comments - POST - Post a new comment regarding a movie by passing movie ID. If the ID is not found it throws an error. Example below:
@@ -39,7 +41,7 @@ http://moviesnodejs.herokuapp.com/comments
 {
 
   "movieid": "20",
-  
+ 
   "comment": "Very nice"
   
 }
