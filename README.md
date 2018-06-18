@@ -38,8 +38,7 @@ http://moviesnodejs.herokuapp.com/comments
 
 {
 
-  "movieid":"20",
-  
+  "movieid": "20",
   
   "comment": "Very nice"
   
