@@ -17,6 +17,20 @@ client.connect((err) => {
   }
 })
 
+exports.insertcomment = function (movieid,comment) {
+ return new Promise(function (resolve, reject) {
+  client.query("INSERT INTO comments(comment,movieid) VALUES ($1, $2)",[comment,movieid],
+    function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+});
+
+}
+
 exports.insertmovie = function (title,year,genre) {
  return new Promise(function (resolve, reject) {
   client.query("INSERT INTO movies(title,year,Genre) VALUES ($1, $2, $3)",[title,year,genre],
@@ -48,6 +62,25 @@ exports.getmoviessimple = function () {
 });
 
 }
+
+exports.getmoviesID = function (id) {
+ return new Promise(function (resolve, reject) {
+  client.query("SELECT * FROM movies WHERE movies.id = $1",[id],
+    function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+       if(result.rows.length == 0)
+        reject(err);
+      else
+        resolve(result);
+      
+    }
+  });
+});
+}
+
+
 
 exports.getmovies = function (sortby) {
   
