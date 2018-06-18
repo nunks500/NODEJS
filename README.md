@@ -19,7 +19,9 @@ They are allocated in heroku server so if interested in calling them just call t
 http://moviesnodejs.herokuapp.com/movies
 
 {
+
 	"movietitle":"Finding Nemo"
+  
 }
 
 -  http://moviesnodejs.herokuapp.com/comments - GET - Gets all comments of all the movies. Supports also some filtering with the movie ID as requested.
@@ -35,8 +37,10 @@ http://moviesnodejs.herokuapp.com/comments?movieid=13
 http://moviesnodejs.herokuapp.com/comments
 
 {
+
   "movieid":"20",
   "comment": "Very nice"
+  
 }
 
 While I tried to implement Angular 6.0 interface, Heroku proved to be a bit hard to deal with, therefore lack of time, which did not allow to make a functional demo of the frontend part
