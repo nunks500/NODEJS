@@ -92,7 +92,7 @@ module.exports = function(app){
            return;
 
        }
-
+       console.log("reeee");
        database.getcommentsbymovie(req.query.movieid)
        .then(function (local) {
             res.status(200).send(local.rows);
