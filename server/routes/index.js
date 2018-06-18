@@ -77,6 +77,7 @@ module.exports = function(app){
 
     app.get('/comments', function(req, res, next) {
 
+        console.log(req.query.movieid);
         if(typeof req.query.movieid == "undefined"){
 
            database.getcomments()
