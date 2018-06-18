@@ -77,7 +77,7 @@ module.exports = function(app){
 
     app.get('/comments', function(req, res, next) {
 
-        if(req.body.movieid == null || req.body.movieid == 'undefined'){
+        if(req.query.movieid == null || req.query.movieid == 'undefined'){
 
            database.getcomments()
            .then(function (local) {
@@ -93,7 +93,7 @@ module.exports = function(app){
 
        }
 
-       database.getcommentsbymovie(req.body.movieid)
+       database.getcommentsbymovie(req.query.movieid)
        .then(function (local) {
             res.status(200).send(local.rows);
          })
