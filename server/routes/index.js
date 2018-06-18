@@ -59,7 +59,7 @@ module.exports = function(app){
 
             })
             .catch(function (err) {
-               res.status(406).json({
+             res.status(406).json({
                 message_class: 'error',
                 message: "ERROR ADDING COMMENT"
             })})
@@ -67,7 +67,7 @@ module.exports = function(app){
 
         })
         .catch(function (err) {
-           res.status(406).json({
+         res.status(406).json({
             message_class: 'error',
             message: "NO MOVIES FOUND WITH THAT ID"
         })})
@@ -75,84 +75,115 @@ module.exports = function(app){
 
     });
 
-	app.get('/movies', function(req, res, next) {
+    app.get('/comments', function(req, res, next) {
+
+        if(req.body.movieid == null || req.body.movieid == 'undefined'){
+
+           database.getcomments()
+           .then(function (local) {
+            res.status(200).send(local.rows);
+        })
+           .catch(function (err) {
+             res.status(406).json({
+                message_class: 'error',
+                message: "NO COMMENTS FOUND"
+            })})
+
+           return;
+
+       }
+
+       database.getcommentsbymovie(req.body.movieid)
+       .then(function (local) {
+            res.status(200).send(local.rows);
+         })
+       .catch(function (err) {
+         res.status(406).json({
+            message_class: 'error',
+            message: "NO COMMENTS FOUND WITH THAT ID"
+        })})
+
+
+   });
+
+    app.get('/movies', function(req, res, next) {
 		//res.sendFile(path.resolve('../App/views/index.html'));
 		if(typeof req.query.year !== "undefined")
 		{
-         if(typeof req.query.sortby !== "undefined"){
-             database.getmoviesbyyear(req.query.year,req.query.sortby)
-             .then(function (local) {
+           if(typeof req.query.sortby !== "undefined"){
+               database.getmoviesbyyear(req.query.year,req.query.sortby)
+               .then(function (local) {
                 res.status(200).send(local.rows);
             })
-             .catch(function (err) {
-               res.status(406).json({
-                message_class: 'error',
-                message: "NO MOVIES FOUND WITH THAT YEAR"
-            })})
-         }
-         else
-         {
+               .catch(function (err) {
+                 res.status(406).json({
+                    message_class: 'error',
+                    message: "NO MOVIES FOUND WITH THAT YEAR"
+                })})
+           }
+           else
+           {
 
-             database.getmoviesbyyearsimple(req.query.year)
-             .then(function (local) {
+               database.getmoviesbyyearsimple(req.query.year)
+               .then(function (local) {
                 res.status(200).send(local.rows);
             })
-             .catch(function (err) {
-               res.status(406).json({
+               .catch(function (err) {
+                 res.status(406).json({
+                    message_class: 'error',
+                    message: "NO MOVIES FOUND WITH THAT YEAR"
+                })})
+           }
+
+           return;
+
+       }
+       else if(typeof req.query.genre !== "undefined")
+       {
+           if(typeof req.query.sortby !== "undefined"){
+              database.getmoviesbygenre(req.query.genre,req.query.sortby)
+              .then(function (local) {
+                res.status(200).send(local.rows);
+            })
+              .catch(function (err) {
+                 res.status(406).json({
+                    message_class: 'error',
+                    message: "NO MOVIES FOUND WITH THAT GENRE"
+                })})
+          }
+          else{
+           database.getmoviesbygenresimple(req.query.genre)
+           .then(function (local) {
+            res.status(200).send(local.rows);
+        })
+           .catch(function (err) {
+             res.status(406).json({
                 message_class: 'error',
-                message: "NO MOVIES FOUND WITH THAT YEAR"
+                message: "NO MOVIES FOUND WITH THAT GENRE"
             })})
-         }
+       }
+       return;
 
-         return;
+   }
 
-     }
-     else if(typeof req.query.genre !== "undefined")
-     {
-         if(typeof req.query.sortby !== "undefined"){
-          database.getmoviesbygenre(req.query.genre,req.query.sortby)
-          .then(function (local) {
-            res.status(200).send(local.rows);
-        })
-          .catch(function (err) {
-           res.status(406).json({
+   if(typeof req.query.sortby !== "undefined"){
+     database.getmovies(req.query.sortby)
+     .then(function (local) {
+        res.status(200).send(local.rows);
+    })
+     .catch(function (err) {
+         res.status(406).json({
             message_class: 'error',
-            message: "NO MOVIES FOUND WITH THAT GENRE"
+            message: "NO MOVIES FOUND"
         })})
-      }
-      else{
-         database.getmoviesbygenresimple(req.query.genre)
-         .then(function (local) {
-            res.status(200).send(local.rows);
-        })
-         .catch(function (err) {
-           res.status(406).json({
-            message_class: 'error',
-            message: "NO MOVIES FOUND WITH THAT GENRE"
-        })})
-     }
-     return;
-
  }
-
- if(typeof req.query.sortby !== "undefined"){
-   database.getmovies(req.query.sortby)
-   .then(function (local) {
-    res.status(200).send(local.rows);
-})
-   .catch(function (err) {
-       res.status(406).json({
-        message_class: 'error',
-        message: "NO MOVIES FOUND"
-    })})
-}
-else{
+ else{
     database.getmoviessimple()
     .then(function (local) {
         res.status(200).send(local.rows);
     })
     .catch(function (err) {
-       res.status(406).json({
+     res.status(406).json({
         message_class: 'error',
         message: "NO MOVIES FOUND"
     })})
@@ -162,22 +193,22 @@ else{
 
 
 
-	app.post('/movies', function(req, res, next) {
+    app.post('/movies', function(req, res, next) {
 
-		var movie = encodeURIComponent(req.body.movietitle);
+      var movie = encodeURIComponent(req.body.movietitle);
 
-		if(req.body.movietitle == null || req.body.movietitle == 'undefined'){
+      if(req.body.movietitle == null || req.body.movietitle == 'undefined'){
 
-			res.status(406).json({
-				message_class: 'error',
-				message: "PARAMETER MISSING"
-			});
-		}
+         res.status(406).json({
+            message_class: 'error',
+            message: "PARAMETER MISSING"
+        });
+     }
 
-		http.get({
-			host: 'omdbapi.com',
-			path: '/?t=' + movie +'&apikey=8adb7f03'
-		}, function(response) {
+     http.get({
+         host: 'omdbapi.com',
+         path: '/?t=' + movie +'&apikey=8adb7f03'
+     }, function(response) {
         // Continuously update stream with data
         var body = '';
         response.on('data', function(d) {

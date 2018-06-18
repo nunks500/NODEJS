@@ -45,6 +45,42 @@ exports.insertmovie = function (title,year,genre) {
 
 }
 
+exports.getcomments = function () {
+ return new Promise(function (resolve, reject) {
+  client.query("SELECT * FROM comments",
+    function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+       if(result.rows.length == 0)
+        reject(err);
+      else
+        resolve(result);
+      
+    }
+  });
+});
+
+}
+
+exports.getcommentsbymovie = function (movieid) {
+ return new Promise(function (resolve, reject) {
+  client.query("SELECT * FROM comments WHERE comments.movieid = $1",[movieid],
+    function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+       if(result.rows.length == 0)
+        reject(err);
+      else
+        resolve(result);
+      
+    }
+  });
+});
+
+}
+
 exports.getmoviessimple = function () {
  return new Promise(function (resolve, reject) {
   client.query("SELECT * FROM movies",
