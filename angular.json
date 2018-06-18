@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "frontend": {
-      "root": "",
+      "root": " ",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
@@ -21,7 +21,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "../node_modules/bootstrap/dist/css/bootstrap.css"
+               { "glob": "**/*", "input": "../node_modules/bootstrap/dist/css/bootstrap.css", "output": "/bootstrap/" }
             ],
             "styles": [
               "src/styles.css"
